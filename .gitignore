@@ -1,3 +1,6 @@
+# Custom ignores
+/data
+
 # History files
 .Rhistory
 .Rapp.history
