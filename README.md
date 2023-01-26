@@ -1,2 +1,2 @@
 # eb-migration
-Exploring EB 96.3
+Exploring EB 96.2
