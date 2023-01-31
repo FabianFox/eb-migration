@@ -6,7 +6,7 @@ if (!require("xfun")) install.packages("xfun")
 pkg_attach2("tidyverse", "rio", "here", "sjlabelled", "eurostat", "janitor", "countrycode",
             "conflicted")
 
-# 
+# Conflicts
 conflict_prefer("filter", "dplyr")
 
 ## Load data ----
@@ -61,26 +61,3 @@ eb.df <- eb.df %>%
     share_foreign >= 50 ~ 10,
     TRUE ~ NA_real_
   ))
-
-# Collapsed share_foreign_cat
-eb.df <- eb.df %>%
-  mutate(share_foreign_cat_clp = if_else(share_foreign_cat %in% c(7:10), 7, share_foreign_cat))
-
-# Collapse qb3
-eb.df <- eb.df %>%
-  mutate(qb3_clp = if_else(qb3 %in% c(7:10), 7, qb3))
-
-# 
-t <- eb.df %>%
-  filter(qb3_clp != 11) %>%
-  mutate(foreign_dev = qb3_clp - share_foreign_cat_clp)
-
-# Make palette (combine blues and reds)
-pal_red <- RColorBrewer::brewer.pal(7, "Reds")
-pal_red[1] <- "#d9d9d9"
-  
-pal_blue <- RColorBrewer::brewer.pal(5, "Blues")
-pal_blue <- pal_blue[2:5]
-
-# 
-pal <- c(pal_blue, pal_red)
